@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} ({{ code }}){% endblock %}
+
+{% block content %}
+<div class="container px-5 py-5 text-center">
+    <h1 class="display-6">{{ title }} ({{ code }})</h1>
+    <p>{{ message }}</p>
+
+    <div class="mt-4">
+        <a class="btn btn-primary" href="{% url 'home' %}">Retour à l'accueil</a>
+    </div>
+
+    {% if code == 404 %}
+        <p class="mt-3 text-muted">Vérifiez l'URL ou recherchez depuis la navigation.</p>
+    {% elif code == 500 %}
+        <p class="mt-3 text-muted">Nos équipes ont été notifiées. Merci de réessayer plus tard.</p>
+    {% else %}
+        <p class="mt-3 text-muted">Une erreur est survenue. Merci de réessayer plus tard.</p>
+  {% endif %}
+</div>
+{% endblock %}
