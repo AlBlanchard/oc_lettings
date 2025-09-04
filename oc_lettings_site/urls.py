@@ -9,3 +9,7 @@ urlpatterns = [
     path("profiles/", include("profiles.urls")),
     path("admin/", admin.site.urls),
 ]
+
+# Pour personnaliser la gestion des erreurs 404 et 500
+handler404 = "oc_lettings_site.views.error_404"
+handler500 = "oc_lettings_site.views.error_500"
