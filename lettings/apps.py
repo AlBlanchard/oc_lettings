@@ -1,5 +1,9 @@
+"""Configuration de l'application lettings."""
+
 from django.apps import AppConfig
 
 
 class LettingsConfig(AppConfig):
-    name = 'lettings'
+    """Configuration de l'application lettings."""
+
+    name = "lettings"

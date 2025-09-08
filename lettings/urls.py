@@ -1,3 +1,5 @@
+"""Configuration des URLs pour l'application lettings."""
+
 from django.urls import path
 from . import views
 
