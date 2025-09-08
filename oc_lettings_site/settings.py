@@ -1,3 +1,5 @@
+"""Configuration Django pour oc_lettings_site."""
+
 import os
 
 from pathlib import Path
