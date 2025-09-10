@@ -1,8 +1,10 @@
 """Vues pour oc_lettings_site."""
 
 from django.shortcuts import render
+from .utils.audit_decorator import audit_command
 
 
+@audit_command(category="base_app", action="view_index")
 def index(request):
     """
     Page d'accueil.
