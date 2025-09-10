@@ -26,7 +26,10 @@ class ProfilesViewsTests(TestCase):
         assert b"alain" in resp.content
 
     def test_detail_status_ok_and_content(self):
-        """Tester que la page detail renvoie un statut 200, utilise le bon template et affiche les bonnes infos."""
+        """
+        Tester que la page detail renvoie un statut 200
+        , utilise le bon template et affiche les bonnes infos.
+        """
         url = reverse("profiles:detail", kwargs={"username": "alain"})
         resp = self.client.get(url)
 
