@@ -60,5 +60,4 @@ def boom(request):
     param request: La requête HTTP
     return: La page d'accueil
     """
-    er_div = 1 / 0  # pour avoir une exception
-    return render(request, "index.html")
+    raise ZeroDivisionError("boom")
