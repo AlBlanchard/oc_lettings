@@ -7,6 +7,8 @@ omit =
     */conftest.py
     */__init__.py
     venv/*
+    oc_lettings_site/wsgi.py
+    oc_lettings_site/asgi.py
 
 [report]
 show_missing = true

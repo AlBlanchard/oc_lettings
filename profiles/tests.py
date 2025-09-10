@@ -19,20 +19,22 @@ class ProfilesViewsTests(TestCase):
         """Tester que la page index renvoie un statut 200 et utilise le bon template."""
         url = reverse("profiles:index")
         resp = self.client.get(url)
-        self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, "profiles/index.html")
-        self.assertContains(resp, "Profiles")
-        self.assertContains(resp, "alain")
+
+        assert resp.status_code == 200
+        assert "profiles/index.html" in [t.name for t in resp.templates]
+        assert b"Profiles" in resp.content
+        assert b"alain" in resp.content
 
     def test_detail_status_ok_and_content(self):
         """Tester que la page detail renvoie un statut 200, utilise le bon template et affiche les bonnes infos."""
         url = reverse("profiles:detail", kwargs={"username": "alain"})
         resp = self.client.get(url)
-        self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, "profiles/detail.html")
-        self.assertContains(resp, "alain")
-        self.assertContains(resp, "Strasbourg")
+
+        assert resp.status_code == 200
+        assert "profiles/detail.html" in [t.name for t in resp.templates]
+        assert b"alain" in resp.content
+        assert b"Strasbourg" in resp.content
 
     def test_str_profile(self):
         """Tester la méthode __str__ du modèle Profile."""
-        self.assertEqual(str(self.profile), "alain")
+        assert str(self.profile) == "alain"
