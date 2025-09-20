@@ -1,9 +1,13 @@
 """Configuration Django pour oc_lettings_site."""
 
 import os
+import sentry_sdk
 
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
+
+from sentry_sdk.integrations.django import DjangoIntegration
+from . import sentry_config
 
 
 load_dotenv()
@@ -125,14 +129,13 @@ STATICFILES_DIRS = [
 
 # ------ Sentry configuration -------
 
-if os.getenv("SENTRY_DSN"):
-    import sentry_sdk
-    from sentry_sdk.integrations.django import DjangoIntegration
-    from . import sentry_config
+SENTRY_DSN = os.getenv("SENTRY_DSN", "")
 
+if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
-        integrations=[DjangoIntegration()],
+        dsn=SENTRY_DSN,
+        environment=os.getenv("SENTRY_ENV", "dev"),
+        release=os.getenv("SENTRY_RELEASE", "oc-lettings@1.0.0"),
     )
 
     sentry_config.init_sentry()
