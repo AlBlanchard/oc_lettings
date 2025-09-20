@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
 
+
 load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -121,3 +122,18 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+# ------ Sentry configuration -------
+
+if os.getenv("SENTRY_DSN"):
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from . import sentry_config
+
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        integrations=[DjangoIntegration()],
+    )
+
+    sentry_config.init_sentry()
+    sentry_config.install_global_exception_hook()

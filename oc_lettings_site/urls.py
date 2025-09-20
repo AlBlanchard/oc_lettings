@@ -11,6 +11,7 @@ urlpatterns = [
     path("profiles/", include("profiles.urls")),
     path("admin/", admin.site.urls),
     path("boom/", views.boom),  # pour tester la page 500
+    path("sentry-debug/", views.boom),  # pour tester Sentry
 ]
 
 # Pour personnaliser la gestion des erreurs 404 et 500

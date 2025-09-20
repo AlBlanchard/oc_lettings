@@ -3,8 +3,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Profile
 from django.contrib.auth.models import User
+from oc_lettings_site.utils.audit_decorator import audit_command
 
 
+@audit_command(category="profiles", action="view_index")
 def index(request):
     """Vue index pour afficher la liste des profils.
     param request: La requête HTTP.
@@ -14,6 +16,7 @@ def index(request):
     return render(request, "profiles/index.html", {"profiles_list": profiles_list})
 
 
+@audit_command(category="profiles", action="view_detail")
 def detail(request, username):
     """Vue detail pour afficher un profil spécifique.
     param request: La requête HTTP.

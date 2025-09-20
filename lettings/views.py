@@ -2,8 +2,10 @@
 
 from django.shortcuts import render, get_object_or_404
 from .models import Letting
+from oc_lettings_site.utils.audit_decorator import audit_command
 
 
+@audit_command(category="lettings", action="view_index")
 def index(request):
     """
     Vue pour l'index des locations.
@@ -14,6 +16,7 @@ def index(request):
     return render(request, "lettings/index.html", {"lettings": lettings})
 
 
+@audit_command(category="lettings", action="view_detail")
 def detail(request, letting_id: int):
     """
     Vue pour le détail d'une location spécifique.
