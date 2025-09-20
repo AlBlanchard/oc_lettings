@@ -2,9 +2,11 @@ name: CI - Tests et Linting
 
 on:
   push:
-    branches: ["*"]
+    branches:
+      - "**"
   pull_request:
-    branches: ["*"]
+    branches:
+      - "**"
 
 jobs:
   tests:
