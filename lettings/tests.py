@@ -46,3 +46,12 @@ class LettingsViewsTests(TestCase):
     def test_str_letting(self):
         """Test de la méthode __str__ du modèle Letting."""
         assert str(self.letting) == "Test Letting"
+
+    def test_str_address(self):
+        """Test de la méthode __str__ du modèle Address."""
+        addr = self.letting.address
+        assert str(addr) == "1 Lil Wayne St"
+        assert addr.city == "Brumath City"
+        assert addr.state == "CA"
+        assert addr.zip_code == 90001
+        assert addr.country_iso_code == "USA"
