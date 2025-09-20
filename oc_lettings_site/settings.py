@@ -1,9 +1,12 @@
 """Configuration Django pour oc_lettings_site."""
 
 import os
+import sentry_sdk
 
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
+
+from . import sentry_config
 
 
 load_dotenv()
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -119,20 +123,22 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATIC_URL = "/static/"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
 # ------ Sentry configuration -------
 
-if os.getenv("SENTRY_DSN"):
-    import sentry_sdk
-    from sentry_sdk.integrations.django import DjangoIntegration
-    from . import sentry_config
+SENTRY_DSN = os.getenv("SENTRY_DSN", "")
 
+if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
-        integrations=[DjangoIntegration()],
+        dsn=SENTRY_DSN,
+        environment=os.getenv("SENTRY_ENV", "dev"),
+        release=os.getenv("SENTRY_RELEASE", "oc-lettings@1.0.0"),
     )
 
     sentry_config.init_sentry()
