@@ -44,9 +44,9 @@ jobs:
       - name: build
         run: |
           docker build -t oc_lettings .
-          docker tag oc_lettings hub.docker.com/repository/docker/alblanchard/oc_lettings:latest
+          docker tag oc_lettings hub.docker.com/repository/docker/alblanchard/oc-lettings:latest
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-          docker push hub.docker.com/repository/docker/alblanchard/oc_lettings:latest
+          docker push hub.docker.com/repository/docker/alblanchard/oc-lettings:latest
 
       - name: deployment
         run: |
