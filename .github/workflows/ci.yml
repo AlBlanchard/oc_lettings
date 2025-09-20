@@ -41,4 +41,15 @@ jobs:
           coverage run -m pytest
           coverage report --fail-under=80
 
+      - name: build
+        run: |
+          docker build -t oc_lettings .
+          docker tag oc_lettings hub.docker.com/repository/docker/alblanchard/oc_lettings:latest
+          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+          docker push hub.docker.com/repository/docker/alblanchard/oc_lettings:latest
+
+      - name: deployment
+        run: |
+          curl -X GET https://api.render.com/deploy/srv-d3777obe5dus7393d9o0?key=KM1zbZ7_HUw
+
 # Petit comm pour test les actions en commit
