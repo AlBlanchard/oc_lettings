@@ -50,6 +50,6 @@ jobs:
 
       - name: deployment
         run: |
-          curl -X GET https://api.render.com/deploy/srv-d3777obe5dus7393d9o0?key=KM1zbZ7_HUw
+          curl -X GET ${{ secrets.RENDER_URL }}
 
 # Petit comm pour test les actions en commit
