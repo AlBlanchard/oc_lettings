@@ -38,3 +38,5 @@ jobs:
         run: |
           coverage run -m pytest
           coverage report --fail-under=80
+
+# Petit comm pour test les actions en commit
