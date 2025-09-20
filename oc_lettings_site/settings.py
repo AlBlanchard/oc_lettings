@@ -6,7 +6,6 @@ import sentry_sdk
 from pathlib import Path
 from dotenv import load_dotenv  # type: ignore
 
-from sentry_sdk.integrations.django import DjangoIntegration
 from . import sentry_config
 
 
