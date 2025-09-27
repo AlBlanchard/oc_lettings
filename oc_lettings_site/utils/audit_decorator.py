@@ -41,9 +41,21 @@ def audit_command(
             )
             try:
                 result = func(*args, **kwargs)
-                audit_event(
-                    f"{action}: ok", {"kwargs": kwargs}, level=event_level_on_success
-                )
+
+                # Pour chopper les 404
+                if hasattr(result, "status_code") and result.status_code >= 400:
+                    audit_event(
+                        f"{action}: http_{result.status_code}",
+                        {"kwargs": kwargs, "status_code": result.status_code},
+                        level=issue_level_on_error,
+                    )
+                else:
+                    audit_event(
+                        f"{action}: ok",
+                        {"kwargs": kwargs},
+                        level=event_level_on_success,
+                    )
+
                 return result
             except Exception as e:
                 # Event + issue (via level error/critical/fatal)
