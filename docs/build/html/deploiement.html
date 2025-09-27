@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
     <link rel="next" title="Architecture" href="architecture.html" />
-    <link rel="prev" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Utilisation" href="utilisation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,35 +36,29 @@
             
   <section id="deploiement">
 <h1>Déploiement<a class="headerlink" href="#deploiement" title="Lien vers cette rubrique">¶</a></h1>
+<p>Le projet utilise <strong>GitHub Actions</strong> pour la CI/CD et <strong>Render</strong> pour l’hébergement.</p>
 <section id="pipeline-ci-cd">
 <h2>Pipeline CI/CD<a class="headerlink" href="#pipeline-ci-cd" title="Lien vers cette rubrique">¶</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Lint et tests</strong> exécutés sur toutes les branches :
-- Flake8
-- Pytest + Coverage (seuil 80%)</p></li>
-<li><p><strong>Build Docker + Push sur Docker Hub</strong> uniquement sur la branche <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
-<li><p><strong>Déploiement Render</strong> déclenché via webhook après push de l’image.</p></li>
+<li><p><strong>Tests et linting</strong> exécutés sur toutes les branches :
+- flake8
+- pytest avec coverage</p></li>
+<li><p><strong>Build et déploiement</strong> uniquement sur <cite>main</cite> :
+- Build Docker
+- Push vers Docker Hub
+- Notification à Render via un webhook</p></li>
 </ol>
 </section>
-<section id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Lien vers cette rubrique">¶</a></h2>
-<p>Construire et lancer l’application :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>oc-lettings:dev<span class="w"> </span>.
-docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>--env-file<span class="w"> </span>.env<span class="w"> </span>oc-lettings:dev
-</pre></div>
-</div>
-</section>
-<section id="docker-compose-optionnel">
-<h2>Docker Compose (optionnel)<a class="headerlink" href="#docker-compose-optionnel" title="Lien vers cette rubrique">¶</a></h2>
-<p>Un fichier <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> permet de lancer l’app plus facilement :</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3&quot;</span>
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
-<span class="w">    </span><span class="nt">env_file</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+<section id="render">
+<h2>Render<a class="headerlink" href="#render" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p>Service : Web Service</p></li>
+<li><p>Port exposé : <strong>8000</strong></p></li>
+<li><p>Dockerfile utilisé pour construire l’image</p></li>
+<li><p>Variables d’environnement chargées automatiquement depuis <cite>.env</cite></p></li>
+</ul>
+<p>Une fois déployé, l’application est accessible sur :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://oc-lettings-xxxx.onrender.com
 </pre></div>
 </div>
 </section>
@@ -99,12 +93,11 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 <p class="caption" role="heading"><span class="caption-text">Contenu</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilisation.html">Utilisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilisation.html">Utilisation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Déploiement</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pipeline-ci-cd">Pipeline CI/CD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker-compose-optionnel">Docker Compose (optionnel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#render">Render</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
@@ -114,7 +107,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="configuration.html" title="Chapitre précédent">Configuration</a></li>
+      <li>Previous: <a href="utilisation.html" title="Chapitre précédent">Utilisation</a></li>
       <li>Next: <a href="architecture.html" title="Chapitre suivant">Architecture</a></li>
   </ul></li>
 </ul>

@@ -35,36 +35,37 @@
             
   <section id="architecture">
 <h1>Architecture<a class="headerlink" href="#architecture" title="Lien vers cette rubrique">¶</a></h1>
-<section id="apercu">
-<h2>Aperçu<a class="headerlink" href="#apercu" title="Lien vers cette rubrique">¶</a></h2>
-<p>Le projet est une application Django découpée en trois modules :</p>
+<section id="organisation-du-projet-django">
+<h2>Organisation du projet Django<a class="headerlink" href="#organisation-du-projet-django" title="Lien vers cette rubrique">¶</a></h2>
 <ul class="simple">
-<li><p><strong>oc_lettings_site</strong> : configuration globale, vues principales, gestion des erreurs 404/500.</p></li>
-<li><p><strong>lettings</strong> : gestion des annonces immobilières.</p></li>
-<li><p><strong>profiles</strong> : gestion des profils utilisateurs.</p></li>
+<li><p><strong>oc_lettings_site</strong> : application principale</p></li>
+<li><p><strong>profiles</strong> : gestion des profils utilisateurs</p></li>
+<li><p><strong>lettings</strong> : gestion des adresses et logements</p></li>
 </ul>
 </section>
-<section id="fonctionnalites-techniques">
-<h2>Fonctionnalités techniques<a class="headerlink" href="#fonctionnalites-techniques" title="Lien vers cette rubrique">¶</a></h2>
+<section id="fichiers-importants">
+<h2>Fichiers importants<a class="headerlink" href="#fichiers-importants" title="Lien vers cette rubrique">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Sentry</strong> : utilisé pour la collecte des erreurs et la traçabilité des événements.</p></li>
-<li><p><strong>Audit Decorator</strong> : décorateur personnalisé pour tracer automatiquement les appels aux vues et commandes.</p></li>
-<li><p><strong>Whitenoise</strong> : gère les fichiers statiques (CSS, JS, images) directement dans le container.</p></li>
-<li><p><strong>Fixtures JSON</strong> : préchargent les données de test (lettings et profils).</p></li>
+<li><p><cite>Dockerfile</cite> : construction de l’image</p></li>
+<li><p><cite>docker-compose.yml</cite> : exécution locale simplifiée</p></li>
+<li><p><cite>entrypoint.sh</cite> : initialise la base, collecte les statiques et lance Gunicorn</p></li>
+<li><p><cite>requirements.txt</cite> : dépendances</p></li>
+<li><p><cite>.readthedocs.yaml</cite> : configuration Read the Docs</p></li>
 </ul>
 </section>
-<section id="pipeline-ci-cd">
-<h2>Pipeline CI/CD<a class="headerlink" href="#pipeline-ci-cd" title="Lien vers cette rubrique">¶</a></h2>
+<section id="gestion-des-fichiers-statiques">
+<h2>Gestion des fichiers statiques<a class="headerlink" href="#gestion-des-fichiers-statiques" title="Lien vers cette rubrique">¶</a></h2>
 <ul class="simple">
-<li><p><strong>GitHub Actions</strong> :
-- Vérifie le linting et les tests sur toutes les branches.
-- Construit et déploie l’image Docker uniquement sur la branche <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
-<li><p><strong>Docker</strong> :
-- Image basée sur <code class="docutils literal notranslate"><span class="pre">python:3.10-slim</span></code>.
-- Contient toutes les dépendances, les migrations automatiques et le chargement des fixtures.</p></li>
-<li><p><strong>Render</strong> :
-- Héberge l’application web.
-- Gère automatiquement la reconstruction du service à chaque nouvelle image Docker.</p></li>
+<li><p><strong>WhiteNoise</strong> est utilisé pour servir les fichiers statiques en production.</p></li>
+<li><p><cite>collectstatic</cite> est exécuté lors de la construction de l’image Docker.</p></li>
+<li><p>Les fichiers sont regroupés dans <cite>/app/staticfiles</cite>.</p></li>
+</ul>
+</section>
+<section id="monitoring-et-audit">
+<h2>Monitoring et audit<a class="headerlink" href="#monitoring-et-audit" title="Lien vers cette rubrique">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Sentry</strong> intégré pour la remontée des erreurs.</p></li>
+<li><p>Un système d”<strong>audit avec breadcrumbs et événements</strong> enregistre les actions importantes.</p></li>
 </ul>
 </section>
 </section>
@@ -98,13 +99,14 @@
 <p class="caption" role="heading"><span class="caption-text">Contenu</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilisation.html">Utilisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilisation.html">Utilisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploiement.html">Déploiement</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#apercu">Aperçu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fonctionnalites-techniques">Fonctionnalités techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pipeline-ci-cd">Pipeline CI/CD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#organisation-du-projet-django">Organisation du projet Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fichiers-importants">Fichiers importants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-fichiers-statiques">Gestion des fichiers statiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-et-audit">Monitoring et audit</a></li>
 </ul>
 </li>
 </ul>

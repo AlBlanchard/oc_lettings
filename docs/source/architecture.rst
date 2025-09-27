@@ -1,35 +1,31 @@
 Architecture
 ============
 
-Aperçu
-------
+Organisation du projet Django
+-----------------------------
 
-Le projet est une application Django découpée en trois modules :
+- **oc_lettings_site** : application principale
+- **profiles** : gestion des profils utilisateurs
+- **lettings** : gestion des adresses et logements
 
-- **oc_lettings_site** : configuration globale, vues principales, gestion des erreurs 404/500.
-- **lettings** : gestion des annonces immobilières.
-- **profiles** : gestion des profils utilisateurs.
+Fichiers importants
+-------------------
 
-Fonctionnalités techniques
---------------------------
+- `Dockerfile` : construction de l'image
+- `docker-compose.yml` : exécution locale simplifiée
+- `entrypoint.sh` : initialise la base, collecte les statiques et lance Gunicorn
+- `requirements.txt` : dépendances
+- `.readthedocs.yaml` : configuration Read the Docs
 
-- **Sentry** : utilisé pour la collecte des erreurs et la traçabilité des événements.
-- **Audit Decorator** : décorateur personnalisé pour tracer automatiquement les appels aux vues et commandes.
-- **Whitenoise** : gère les fichiers statiques (CSS, JS, images) directement dans le container.
-- **Fixtures JSON** : préchargent les données de test (lettings et profils).
+Gestion des fichiers statiques
+------------------------------
 
-Pipeline CI/CD
---------------
+- **WhiteNoise** est utilisé pour servir les fichiers statiques en production.
+- `collectstatic` est exécuté lors de la construction de l'image Docker.
+- Les fichiers sont regroupés dans `/app/staticfiles`.
 
-- **GitHub Actions** :  
-  - Vérifie le linting et les tests sur toutes les branches.
-  - Construit et déploie l'image Docker uniquement sur la branche ``main``.
+Monitoring et audit
+-------------------
 
-- **Docker** :  
-  - Image basée sur ``python:3.10-slim``.  
-  - Contient toutes les dépendances, les migrations automatiques et le chargement des fixtures.
-
-- **Render** :  
-  - Héberge l'application web.
-  - Gère automatiquement la reconstruction du service à chaque nouvelle image Docker.
-
+- **Sentry** intégré pour la remontée des erreurs.
+- Un système d'**audit avec breadcrumbs et événements** enregistre les actions importantes.

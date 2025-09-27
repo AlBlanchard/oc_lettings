@@ -1,39 +1,30 @@
 Déploiement
 ===========
 
+Le projet utilise **GitHub Actions** pour la CI/CD et **Render** pour l'hébergement.
+
 Pipeline CI/CD
 --------------
 
-1. **Lint et tests** exécutés sur toutes les branches :
-   - Flake8
-   - Pytest + Coverage (seuil 80%)
+1. **Tests et linting** exécutés sur toutes les branches :
+   - flake8
+   - pytest avec coverage
 
-2. **Build Docker + Push sur Docker Hub** uniquement sur la branche ``main``.
+2. **Build et déploiement** uniquement sur `main` :
+   - Build Docker
+   - Push vers Docker Hub
+   - Notification à Render via un webhook
 
-3. **Déploiement Render** déclenché via webhook après push de l'image.
-
-Docker
+Render
 ------
 
-Construire et lancer l'application :
+- Service : Web Service
+- Port exposé : **8000**
+- Dockerfile utilisé pour construire l'image
+- Variables d'environnement chargées automatiquement depuis `.env`
 
-.. code-block:: bash
+Une fois déployé, l'application est accessible sur :
 
-   docker build -t oc-lettings:dev .
-   docker run -it -p 8000:8000 --env-file .env oc-lettings:dev
+.. code-block:: text
 
-Docker Compose (optionnel)
---------------------------
-
-Un fichier ``docker-compose.yml`` permet de lancer l'app plus facilement :
-
-.. code-block:: yaml
-
-   version: "3"
-   services:
-     web:
-       build: .
-       ports:
-         - "8000:8000"
-       env_file:
-         - .env
+   https://oc-lettings-xxxx.onrender.com
