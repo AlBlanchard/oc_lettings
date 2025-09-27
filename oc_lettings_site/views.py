@@ -30,6 +30,7 @@ def _render_error(request, code: int, title: str, message: str):
     return render(request, "error.html", ctx, status=code)
 
 
+@audit_command(category="base_app", action="error_404", issue_level_on_error="error")
 def error_404(request, exception):
     """
     Page d'erreur 404.
