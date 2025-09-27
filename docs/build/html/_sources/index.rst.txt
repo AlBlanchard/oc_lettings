@@ -9,7 +9,7 @@ Docker et CI/CD via GitHub Actions.
    :caption: Contenu
 
    installation
-   utilisation
    configuration
+   utilisation
    deploiement
    architecture
