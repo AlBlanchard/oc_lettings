@@ -41,14 +41,22 @@ jobs:
           coverage run -m pytest
           coverage report --fail-under=80
 
-      - name: build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: tests
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Build et push Docker image
         run: |
           docker build -t oc_lettings .
           docker tag oc_lettings alblanchard/oc-lettings:latest
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
           docker push alblanchard/oc-lettings:latest
 
-      - name: deployment
+      - name: Deploiement Render
         run: |
           curl -X GET ${{ secrets.RENDER_URL }}
 
