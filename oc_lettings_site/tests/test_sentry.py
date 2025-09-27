@@ -53,7 +53,7 @@ def test_init_sentry_with_dsn(monkeypatch):
 
 
 def test_install_global_exception_hook(monkeypatch, caplog):
-    """Vérifie que l’exception hook loggue une erreur non gérée."""
+    """Vérifie que l'exception hook loggue une erreur non gérée."""
     caplog.set_level(logging.CRITICAL)
     sc._hook_installed = False  # reset
     # Monkeypatch capture_exception pour éviter un vrai envoi
