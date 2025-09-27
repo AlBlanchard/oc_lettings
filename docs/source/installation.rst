@@ -36,8 +36,10 @@ Installation locale
       python manage.py migrate
       python manage.py loaddata fixture.json
 
-4. Lancer le serveur :
+4. Lancer le serveur en local :
 
    .. code-block:: bash
 
       python manage.py runserver
+
+   Le site sera accessible à l'adresse : http://127.0.0.1:8000
