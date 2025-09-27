@@ -1,0 +1,6 @@
+[MASTER]
+load-plugins = pylint_django
+
+[MESSAGES CONTROL]
+disable = all
+enable = missing-module-docstring, missing-class-docstring, missing-function-docstring
