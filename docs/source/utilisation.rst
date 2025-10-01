@@ -15,7 +15,7 @@ Reporting Sentry
 
 L'application utilise Sentry pour le suivi des erreurs et des performances.
 N'oubliez pas de configurer la variable d'environnement `SENTRY_DSN` avec votre DSN Sentry.
-Pour ceci, vous reportez à la section :ref:`Configuration`. 
+Pour ceci, vous reportez à la section :ref:`configuration`. 
 
 Pour consulter les rapports Sentry :
 
