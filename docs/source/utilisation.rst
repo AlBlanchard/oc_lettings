@@ -11,7 +11,7 @@ Une fois le serveur lancé :
 - Liste des profils : http://127.0.0.1:8000/profiles/
 
 Reporting Sentry
------------
+----------------
 
 L'application utilise Sentry pour le suivi des erreurs et des performances.
 N'oubliez pas de configurer la variable d'environnement `SENTRY_DSN` avec votre DSN Sentry.
