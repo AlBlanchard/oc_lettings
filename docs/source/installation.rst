@@ -36,10 +36,19 @@ Installation locale
       python manage.py migrate
       python manage.py loaddata fixture.json
 
-4. Lancer le serveur en local :
+4. Collecter les statics en vue du déploiement :
+
+   .. code-block:: bash
+
+      python manage.py collectstatic
+
+5. Tester le serveur en local :
 
    .. code-block:: bash
 
       python manage.py runserver
 
-   Le site sera accessible à l'adresse : http://127.0.0.1:8000
+   Si toutes les étapes se sont bien déroulées, le site sera accessible à l'adresse : http://127.0.0.1:8000
+   Pour un déploiement en production, passer à la section :ref:`Configuration` puis :ref:`Déploiement`.
+
+
