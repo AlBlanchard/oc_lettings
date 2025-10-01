@@ -49,6 +49,6 @@ Installation locale
       python manage.py runserver
 
    Si toutes les étapes se sont bien déroulées, le site sera accessible à l'adresse : http://127.0.0.1:8000
-   Pour un déploiement en production, passer à la section :ref:`Configuration` puis :ref:`Déploiement`.
+   Pour un déploiement en production, passer à la section :ref:`configuration` puis :ref:`deploiement`.
 
 
