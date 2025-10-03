@@ -9,7 +9,12 @@ Docker et CI/CD via GitHub Actions TEST.
    :caption: Contenu
 
    installation
-   configuration
+   quickstart
    utilisation
-   deploiement
+   technologies
+   database
+   api
    architecture
+   deploiement
+   configuration
+
