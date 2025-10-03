@@ -1,4 +1,4 @@
-name: CI - Tests et Linting
+name: CI/CD - Tests et déploiement
 
 on:
   push:
@@ -51,13 +51,21 @@ jobs:
 
       - name: Build et push Docker image
         run: |
+          COMMIT_HASH=$(echo $GITHUB_SHA | cut -c1-7)
+          echo "Commit hash utilisé : $COMMIT_HASH"
+
           docker build -t oc_lettings .
           docker tag oc_lettings alblanchard/oc-lettings:latest
+          docker tag oc_lettings alblanchard/oc-lettings:$COMMIT_HASH
+
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
           docker push alblanchard/oc-lettings:latest
+          docker push alblanchard/oc-lettings:$COMMIT_HASH
+
+          echo "Image disponible sur DockerHub :"
+          echo "docker pull alblanchard/oc-lettings:latest"
+          echo "docker pull alblanchard/oc-lettings:$COMMIT_HASH"
 
       - name: Deploiement Render
         run: |
           curl -X GET ${{ secrets.RENDER_URL }}
-
-# Petit comm pour test les actions en commit
