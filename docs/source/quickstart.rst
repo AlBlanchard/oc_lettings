@@ -24,9 +24,12 @@ L'application est accessible sur : http://127.0.0.1:8000/
 Exécution via Docker
 --------------------
 
+Bien vérifier que le fichier ``entrypoint.sh`` est au format LF (et non CRLF).
+Sinon Docker ne pourra pas l'exécuter.
+
 .. code-block:: bash
 
-   docker build -t oc-lettings .
+   docker build --no-cache -t oc-lettings .
    docker run -it -p 8000:8000 --env-file .env oc-lettings
 
 L'application est accessible sur : http://127.0.0.1:8000/
