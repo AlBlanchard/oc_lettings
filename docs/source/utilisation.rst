@@ -11,6 +11,13 @@ Une fois le serveur lancé :
 - Liste des profils : http://127.0.0.1:8000/profiles/
 - Ou utilisez le menu pour accéder aux sections Lettings et Profiles.
 
+Panel d'administration
+----------------------
+
+- Aller sur http://127.0.0.1:8000/admin
+- Connectez-vous avec l'utilisateur admin, mot de passe Abc1234!
+
+
 Cas d'utilisation
 -----------------
 
